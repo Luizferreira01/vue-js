@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Vue.js</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input type="number" v-model="num1" @input="calcularResultado">
+        <select v-model="operacao" @input="calcularResultado">
+            <option value="soma">+</option>
+            <option value="subtracao">-</option>
+            <option value="multiplicacao">*</option>
+            <option value="divisao">/</option>
+        </select>
+        <input type="number" v-model="num2" @input="calcularResultado">
+        <p>Resultado: {{ resultado }}</p>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                num1: 0,
+                num2: 0,
+                operacao: 'soma',
+                resultado: 0
+            },
+            methods: {
+                calcularResultado() {
+                    switch (this.operacao) {
+                        case 'soma':
+                            this.resultado = parseFloat(this.num1) + parseFloat(this.num2);
+                            break;
+                        case 'subtracao':
+                            this.resultado = parseFloat(this.num1) - parseFloat(this.num2);
+                            break;
+                        case 'multiplicacao':
+                            this.resultado = parseFloat(this.num1) * parseFloat(this.num2);
+                            break;
+                        case 'divisao':
+                            this.resultado = parseFloat(this.num1) / parseFloat(this.num2);
+                            break;
+                        default:
+                            this.resultado = 'Operação inválida';
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
